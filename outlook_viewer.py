@@ -29,7 +29,7 @@ class Email(object):
         try:
             html = html.decode('utf-8')
         except UnicodeDecodeError as e:
-            html = html.decode('iso-8859-1')
+            html = html.decode('iso-8859-1', errors='ignore')
 
         part = MIMEText(html, 'html')
         msg.attach(part)
