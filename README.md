@@ -27,7 +27,7 @@ EOF
 on run {input, parameters}
     set f to quoted form of (POSIX path of (input as text))
     do shell script "source ~/.bash_profile"
-    do shell script "open -n -a MailReader.app --args " & f
+    do shell script "open -n -a MsgViewer.app --args " & f
 end run
 ```
 Copy both applications into the Applications folder.
