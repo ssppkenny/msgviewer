@@ -4,8 +4,12 @@ Mac OS systems.
 
 There is an easy trick.
 
-* Using Automator create an application which can open an MSG File in Outlook (Run Shell Script), call it MsgViewer
-* Using Automator create an application which can run multiple instances of the bofore created Application (Run Apple Script), call it OutLookPreview
+* Install brew if not already installed.
+* Run brew install python (which now installs python 3.9).
+* Checkout this repository.
+* Run pip3 install -r requirements.txt --user.
+* Using Automator create an application which can open an MSG File in Outlook (Run Shell Script), call it MsgViewer.
+* Using Automator create an application which can run multiple instances of the bofore created Application (Run Apple Script), call it OutlookPreview.
 
 
 ### How to create these applications:
@@ -18,7 +22,7 @@ Place here the content of outlook_preview.py
 EOF
 }
 ```
-### OutLookPreview
+### OutlookPreview
 ```console
 on run {input, parameters}
     set f to quoted form of (POSIX path of (input as text))
