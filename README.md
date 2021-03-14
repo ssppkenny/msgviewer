@@ -21,6 +21,7 @@ runpy3 () {
 Place here the content of outlook_preview.py
 EOF
 }
+runpy3 "$@"
 ```
 ### OutlookPreview
 ```console
