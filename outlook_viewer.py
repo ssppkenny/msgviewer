@@ -4,6 +4,7 @@ import sys
 from email import generator
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+import tempfile
 
 from email.mime.application import MIMEApplication
 
@@ -18,7 +19,7 @@ class Email(object):
         recepient = self.__msg.to
         subject = self.__msg.subject
 
-        msg = MIMEMultipart('alternative')
+        msg = MIMEMultipart('mixed')
         msg['Subject'] = subject
         msg['From'] = sender
         msg['To'] = recepient
@@ -29,7 +30,7 @@ class Email(object):
         try:
             html = html.decode('utf-8')
         except UnicodeDecodeError as e:
-            html = html.decode('iso-8859-1', errors='ignore')
+            html = html.decode('iso-8859-1')
 
         part = MIMEText(html, 'html')
         msg.attach(part)
@@ -45,12 +46,16 @@ class Email(object):
 
     def __saveToFile(self,msg):
         old_name = self.__filename
+        old_name = os.path.basename(old_name)
         pre, ext = os.path.splitext(old_name)
         outfile_name = pre + ".eml"
-        with open(outfile_name, 'w') as outfile:
+        temp_dir = tempfile.TemporaryDirectory().name
+        os.mkdir(temp_dir)
+        outfile_path = temp_dir + "/" + outfile_name 
+        with open(outfile_path, 'w') as outfile:
             gen = generator.Generator(outfile)
             gen.flatten(msg)
-        self.__eml_file_name = outfile_name
+        self.__eml_file_name = outfile_path
 
 
 class OutlookPreview(object):
@@ -66,5 +71,3 @@ class OutlookPreview(object):
 
 
 OutlookPreview(sys.argv)
-
-
