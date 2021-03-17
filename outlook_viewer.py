@@ -18,7 +18,7 @@ class Email(object):
         recepient = self.__msg.to
         subject = self.__msg.subject
 
-        msg = MIMEMultipart('alternative')
+        msg = MIMEMultipart('mixed')
         msg['Subject'] = subject
         msg['From'] = sender
         msg['To'] = recepient
