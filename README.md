@@ -18,7 +18,7 @@ There is an easy trick.
 #!/bin/bash
 runpy3 () {
 /usr/local/bin/python3 <<'EOF' - "$@"
-Place here the content of outlook_preview.py
+Place here the content of outlook_viewer.py
 EOF
 }
 runpy3 "$@"
