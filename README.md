@@ -17,7 +17,7 @@ There is an easy trick.
 ```console
 #!/bin/bash
 runpy3 () {
-/usr/local/bin/python3 <<'EOF' - "$@"
+/usr/bin/env python3 <<'EOF' - "$@"
 Place here the content of outlook_viewer.py
 EOF
 }
