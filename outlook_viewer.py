@@ -24,8 +24,13 @@ class Email(object):
         msg['From'] = sender
         msg['To'] = recepient
         for a in self.__msg.attachments:
-            msg.attach(MIMEApplication(a.data, Name=a.longFilename))
-        
+            if not isinstance(a.data, extract_msg.Message):
+                msg.attach(MIMEApplication(a.data, Name=a.longFilename))
+            else:
+                m = a.data
+                for b in m.attachments:
+                    msg.attach(MIMEApplication(b.data, Name=b.longFilename))
+
         html = self.__msg.htmlBody if not self.__msg.htmlBody is None else self.__msg.body
         try:
             html = html.decode('utf-8')
