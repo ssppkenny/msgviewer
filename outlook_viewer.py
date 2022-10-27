@@ -30,10 +30,11 @@ class Email(object):
                 m = a.data
                 for b in m.attachments:
                     msg.attach(MIMEApplication(b.data, Name=b.longFilename))
-
+        
         html = self.__msg.htmlBody if not self.__msg.htmlBody is None else self.__msg.body
         try:
-            html = html.decode('utf-8')
+            if not isinstance(html,str):
+                html = html.decode('utf-8')
         except UnicodeDecodeError as e:
             html = html.decode('iso-8859-1')
 
